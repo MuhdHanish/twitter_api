@@ -1,5 +1,5 @@
+import { responseHandler } from "@/utils";
 import { NextRequest, NextResponse } from "next/server";
-import { responseHandler } from "../";
 
 export const GET = (_req: NextRequest, _res: NextResponse) => {
   return responseHandler.notFoundHandler();
