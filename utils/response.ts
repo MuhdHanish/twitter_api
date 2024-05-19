@@ -1,14 +1,16 @@
 import { NextResponse } from "next/server";
 import { CustomError } from "@/utils/error";
 
-class ResponseHandler  {
+class ResponseHandler {
   successHandler(data: any = null) {
     const resposeConfig = data ? { message: `OK`, data } : { message: `OK` };
     return NextResponse.json(resposeConfig, { status: 200 });
   }
 
   createHandler(data: any = null) {
-    const resposeConfig = data ? { message: `Created`, data } : { message: `Created` };
+    const resposeConfig = data
+      ? { message: `Created`, data }
+      : { message: `Created` };
     return NextResponse.json(resposeConfig, { status: 201 });
   }
 
@@ -19,30 +21,28 @@ class ResponseHandler  {
     );
   }
 
-  unAuthenticatedHandler() {
+  unAuthenticatedHandler(message: string | null = null) {
     return NextResponse.json(
-      { message: `Un Authenticated` },
+      { message: message ? message : `Un Authenticated` },
       { status: 401 }
     );
   }
 
   accessForbiddenHandler() {
-    return NextResponse.json(
-      { message: `Access Forbidden` },
-      { status: 403 }
-    );
+    return NextResponse.json({ message: `Access Forbidden` }, { status: 403 });
   }
 
   serverErrorHandler(error: any) {
     console.error("Internal server error:", error);
-    const { message = "Unexpected error", code = 500 } = error instanceof CustomError ? error : {};
+    const { message = "Unexpected error", code = 500 } =
+      error instanceof CustomError ? error : {};
     return NextResponse.json(
       { message: `Internal server error`, error: message },
       { status: code }
     );
   }
 
-  customHandler(message: string | string[], data: any, status: number) {
+  customHandler(message: string | string[], status: number, data: any = null) {
     const resposeConfig = data ? { message, data } : { message };
     return NextResponse.json(resposeConfig, { status });
   }
