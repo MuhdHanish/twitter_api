@@ -8,7 +8,7 @@ class ResponseHandler  {
   }
 
   createHandler(data: any = null) {
-    const resposeConfig = data ? { message: `OK`, data } : { message: `OK` };
+    const resposeConfig = data ? { message: `Created`, data } : { message: `Created` };
     return NextResponse.json(resposeConfig, { status: 201 });
   }
 
@@ -42,7 +42,7 @@ class ResponseHandler  {
     );
   }
 
-  customHandler(message: string | string[], data: any = null, status: number) {
+  customHandler(message: string | string[], data: any, status: number) {
     const resposeConfig = data ? { message, data } : { message };
     return NextResponse.json(resposeConfig, { status });
   }
