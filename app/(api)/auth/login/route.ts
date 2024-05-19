@@ -15,8 +15,7 @@ export const POST = async (req: NextRequest, _res: NextResponse) => {
     await prisma.$connect();
     const exist  = await prisma.user.findFirst({ where: { email } });
     if (exist && await bcrypt.compare(password, exist.password)) {
-      const { password: storedPassword, ...user } = exist;
-      return responseHandler.customHandler("Logged In", 200, user);
+      return responseHandler.customHandler("Logged In", 200, exist);
     } else {
       return responseHandler.unAuthenticatedHandler("No user found with the given credentials");
     }
