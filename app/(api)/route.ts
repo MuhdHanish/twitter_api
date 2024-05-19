@@ -1,5 +1,12 @@
 import { responseHandler } from "@/utils";
 
+export const handleNotFound = () => {
+  try {
+    return responseHandler.notFoundHandler();
+  } catch (error) {
+    return responseHandler.serverErrorHandler(error);
+  }
+}
 export const GET = () => {
   try {
     return responseHandler.successHandler();
@@ -7,3 +14,7 @@ export const GET = () => {
     return responseHandler.serverErrorHandler(error);
   }
 };
+
+export const POST = () => handleNotFound();
+export const PUT = () => handleNotFound();
+export const DELETE = () => handleNotFound();
