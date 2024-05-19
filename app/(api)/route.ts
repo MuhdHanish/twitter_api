@@ -14,7 +14,3 @@ export const GET = () => {
     return responseHandler.serverErrorHandler(error);
   }
 };
-
-export const POST = () => handleNotFound();
-export const PUT = () => handleNotFound();
-export const DELETE = () => handleNotFound();
